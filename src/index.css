@@ -154,7 +154,7 @@
 
 @utility meteor {
   @apply absolute bg-linear-to-r from-white via-white to-transparent;
-  box-shadow:0 0 10px 5px rgba(255, 255, 255, 0.3);
+  box-shadow:0 0 10px 5px rgba(255, 255, 255, 0.35);
 }
 
 #root {
