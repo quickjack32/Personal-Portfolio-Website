@@ -10,11 +10,11 @@ export const HeroSection = () => {
                     <h1 className = 'text-4xl md:text-6xl font-bold tracking-tight'>
                         <span className = 'opacity-0 animate-fade-in'> Hi, I'm  </span>
                         <span className = 'text-primary opacity-0 animate-fade-in-delay-1'> {" "} Jack </span>
-                        <span className = 'text-gradient ml-2 opacity-0 animate-fade-in-delay-2'> {" "} Quick  </span>
+                        <span className = 'text-gradient ml-2 opacity-0 animate-fade-in-delay-2'> {" "} Quick </span>
                     </h1>
                     <p className = 'text-lg md:text-xl text-muted-foreground max-2-2xl mx-auto opacity-0 animate-fade-in-delay-3'> 
                         I'm a data scientist by day and an author by night.
-                        The story is the key and finding it is my craft.
+                        The story is the key and uncovering it is my craft.
                     </p>
                     <div className = 'pt-3 opacity-0 animate-fade-in-delay-4'>
                         <a href = '#bibliography' className = 'cosmic-button'>
