@@ -3,6 +3,7 @@ import { StarBackground } from '@/components/StarBackground';
 import { NavBar } from '@/components/NavBar';
 import { HeroSection } from '@/components/HeroSection';
 import { AboutSection } from "@/components/AboutSection";
+import { SkillsSection } from "@/components/SkillsSection";
 
 export function Home () {
     return <div className = 'min-h-screen bg-background text-foreground overflow-x-hidden'>
@@ -17,7 +18,8 @@ export function Home () {
 
             <main>
             < HeroSection />  
-            < AboutSection />      
+            < AboutSection />
+            < SkillsSection />
             </main>
 
 
