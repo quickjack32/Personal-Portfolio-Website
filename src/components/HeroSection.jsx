@@ -13,7 +13,7 @@ export const HeroSection = () => {
                         <span className = 'text-gradient ml-2 opacity-0 animate-fade-in-delay-2'> {" "} Quick </span>
                     </h1>
                     <p className = 'text-lg md:text-xl text-muted-foreground max-2-2xl mx-auto opacity-0 animate-fade-in-delay-3'> 
-                        I'm a data scientist by day and an author by night.
+                        I'm a Data Scientist by day and an Author by night.
                         The story is the key and uncovering it is my craft.
                     </p>
                     <div className = 'pt-3 opacity-0 animate-fade-in-delay-4'>
