@@ -7,6 +7,7 @@ import { SkillsSection } from "@/components/SkillsSection";
 import { ProjectsSection } from "../components/ProjectsSection";
 import { ContactSection } from "@/components/ContactSection";
 import { Footer } from "@/components/Footer";
+import { BibliographySection } from "@/components/BibliographySection";
 
 export function Home () {
     return <div className = 'min-h-screen bg-background text-foreground overflow-x-hidden'>
@@ -23,6 +24,7 @@ export function Home () {
             < HeroSection />  
             < AboutSection />
             < SkillsSection />
+            < BibliographySection />
             < ProjectsSection />
             < ContactSection />
             </main>
