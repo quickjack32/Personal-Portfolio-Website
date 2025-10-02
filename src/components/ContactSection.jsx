@@ -15,7 +15,8 @@ export const ContactSection = () => {
         setTimeout(() => {
             toast({
                 title: 'Message sent!',
-                description: "Thanks for reaching out. I'll get back to you as soon as I can."
+                description: "Thanks for reaching out. I'll get back to you as soon as I can.",
+                duration: 3000
             })
                 setIsSubmitting(false);
         }, 1250);

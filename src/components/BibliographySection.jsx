@@ -40,7 +40,7 @@ export const BibliographySection = () => {
 
                                 </div> 
                                 <a 
-                                    href = '/The-Garden.pdf' 
+                                    href = "/The-Garden.pdf"
                                     className = 'cosmic-button'
                                     download>
                                     Download
