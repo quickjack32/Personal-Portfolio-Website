@@ -52,10 +52,23 @@ export const BibliographySection = () => {
                                     </h5>
                                 </div>
                             </div>
-                            <a 
-                            className = 'cosmic-button'
-                            href = {sample.buttonAction === 'download' ? sample.actionLink : "#contact"}
-                            >{sample.linkText}</a>
+                                                        {sample.buttonAction === 'download' ? (
+                                                            <a
+                                                                className='cosmic-button'
+                                                                href={sample.actionLink}
+                                                                download
+                                                            >
+                                                                {sample.linkText}
+                                                            </a>
+                                                        ) : (
+                                                            <a
+                                                                className='cosmic-button'
+                                                                href={'#contact'}
+                                                                
+                                                            >
+                                                                {sample.linkText}
+                                                            </a>
+                                                        )}
                         </div>
                     ))}
                 </div>
