@@ -26,7 +26,7 @@ export default async function handler(req, res) {
     }
 
     console.log('Environment check:');
-    console.log('API Key starts with "key-":', process.env.MAILGUN_API_KEY.startsWith('key-'));
+    console.log('API Key format (first 10 chars):', process.env.MAILGUN_API_KEY.substring(0, 10) + '...');
     console.log('Domain:', process.env.MAILGUN_DOMAIN);
     console.log('Recipient:', process.env.RECIPIENT_EMAIL);
 
