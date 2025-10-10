@@ -7,20 +7,36 @@ export const ContactSection = () => {
     const {toast} = useToast();
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
+    async function handleSubmit(e) {
+        e.preventDefault();
+        
+        const formData = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            message: document.getElementById('message').value
+        };
 
-        setIsSubmitting(true);
+        try {
+            const response = await fetch('/api/send-email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+            });
 
-        setTimeout(() => {
-            toast({
-                title: 'Message sent!',
-                description: "Thanks for reaching out. I'll get back to you as soon as I can.",
-                duration: 3000
-            })
-                setIsSubmitting(false);
-        }, 1250);
-    };
+            const data = await response.json();
+            
+            if (response.ok) {
+            alert('Message sent successfully!');
+            } else {
+            alert('Failed to send message. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+        }
+        };
 
     return(
         <section 
@@ -99,7 +115,7 @@ export const ContactSection = () => {
                         <h3 className = 'text-2xl font-semibold mb-6'> 
                             Send a Message
                         </h3>
-                        <form className = 'space-y-6'>
+                        <form className = 'space-y-6' onSubmit = {handleSubmit}>
                             <div>
                                 <label htmlFor = 'name' className = 'block text-sm font-medium mb-2'> Your Name</label>
                                 <input 
