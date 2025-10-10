@@ -16,16 +16,23 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
+    // Validate environment variables
+    if (!process.env.MAILGUN_API_KEY || !process.env.MAILGUN_DOMAIN || !process.env.RECIPIENT_EMAIL) {
+      console.error('Missing environment variables');
+      return res.status(500).json({ error: 'Server configuration error' });
+    }
+
     // Initialize Mailgun
     const mailgun = new Mailgun(formData);
     const mg = mailgun.client({
       username: 'api',
       key: process.env.MAILGUN_API_KEY,
+      url: 'https://api.mailgun.net',
     });
 
     // Send email
     const emailData = {
-      from: `Website Contact Form <noreply@${process.env.MAILGUN_DOMAIN}>`,
+      from: `Contact Form <postmaster@${process.env.MAILGUN_DOMAIN}>`,
       to: process.env.RECIPIENT_EMAIL,
       subject: `New Contact Form Submission from ${name}`,
       text: `
@@ -34,7 +41,7 @@ Email: ${email}
 
 Message:
 ${message}
-      `,
+      `.trim(),
       html: `
         <h2>New Contact Form Submission</h2>
         <p><strong>Name:</strong> ${name}</p>
@@ -45,12 +52,18 @@ ${message}
       'h:Reply-To': email,
     };
 
+    console.log('Attempting to send email with domain:', process.env.MAILGUN_DOMAIN);
     const result = await mg.messages.create(process.env.MAILGUN_DOMAIN, emailData);
+    console.log('Email sent successfully:', result);
 
     return res.status(200).json({ success: true, message: 'Email sent successfully' });
   } catch (error) {
     console.error('Error sending email:', error);
-    return res.status(500).json({ error: 'Failed to send email' });
+    console.error('Error details:', error.message, error.stack);
+    return res.status(500).json({ 
+      error: 'Failed to send email',
+      details: error.message 
+    });
   }
 }
 
