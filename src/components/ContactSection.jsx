@@ -9,6 +9,7 @@ export const ContactSection = () => {
 
     async function handleSubmit(e) {
         e.preventDefault();
+        setIsSubmitting(true);
         
         const formData = {
             name: document.getElementById('name').value,
@@ -18,25 +19,40 @@ export const ContactSection = () => {
 
         try {
             const response = await fetch('/api/send-email', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData)
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
             });
 
             const data = await response.json();
             
             if (response.ok) {
-            alert('Message sent successfully!');
+                toast({
+                    title: 'Message sent!',
+                    description: "Thanks for reaching out. I'll get back to you as soon as I can.",
+                });
+                // Reset the form
+                e.target.reset();
             } else {
-            alert('Failed to send message. Please try again.');
+                toast({
+                    title: 'Error',
+                    description: 'Failed to send message. Please try again later.',
+                    variant: 'destructive',
+                });
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('An error occurred. Please try again.');
+            toast({
+                title: 'Error',
+                description: 'An error occurred. Please try again later.',
+                variant: 'destructive',
+            });
+        } finally {
+            setIsSubmitting(false);
         }
-        };
+    };
 
     return(
         <section 
@@ -111,7 +127,7 @@ export const ContactSection = () => {
                             </div>
                         </div>
                     </div>
-                    <div className = 'bg-card p-8 rounded-lg shadow-xs' onSubmit = {handleSubmit} >
+                    <div className = 'bg-card p-8 rounded-lg shadow-xs'>
                         <h3 className = 'text-2xl font-semibold mb-6'> 
                             Send a Message
                         </h3>
