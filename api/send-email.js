@@ -25,7 +25,7 @@ export default async function handler(req, res) {
 
     // Send email
     const emailData = {
-      from: `Website Contact Form <mailgun@${process.env.MAILGUN_DOMAIN}>`,
+      from: `Website Contact Form <noreply@${process.env.MAILGUN_DOMAIN}>`,
       to: process.env.RECIPIENT_EMAIL,
       subject: `New Contact Form Submission from ${name}`,
       text: `
@@ -42,9 +42,10 @@ ${message}
         <p><strong>Message:</strong></p>
         <p>${message.replace(/\n/g, '<br>')}</p>
       `,
+      'h:Reply-To': email,
     };
 
-    await mg.messages.create(process.env.MAILGUN_DOMAIN, emailData);
+    const result = await mg.messages.create(process.env.MAILGUN_DOMAIN, emailData);
 
     return res.status(200).json({ success: true, message: 'Email sent successfully' });
   } catch (error) {
