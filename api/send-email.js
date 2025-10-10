@@ -19,14 +19,22 @@ export default async function handler(req, res) {
     // Validate environment variables
     if (!process.env.MAILGUN_API_KEY || !process.env.MAILGUN_DOMAIN || !process.env.RECIPIENT_EMAIL) {
       console.error('Missing environment variables');
+      console.error('MAILGUN_API_KEY exists:', !!process.env.MAILGUN_API_KEY);
+      console.error('MAILGUN_DOMAIN exists:', !!process.env.MAILGUN_DOMAIN);
+      console.error('RECIPIENT_EMAIL exists:', !!process.env.RECIPIENT_EMAIL);
       return res.status(500).json({ error: 'Server configuration error' });
     }
+
+    console.log('Environment check:');
+    console.log('API Key starts with "key-":', process.env.MAILGUN_API_KEY.startsWith('key-'));
+    console.log('Domain:', process.env.MAILGUN_DOMAIN);
+    console.log('Recipient:', process.env.RECIPIENT_EMAIL);
 
     // Initialize Mailgun
     const mailgun = new Mailgun(formData);
     const mg = mailgun.client({
       username: 'api',
-      key: process.env.MAILGUN_API_KEY,
+      key: process.env.MAILGUN_API_KEY.trim(),
       url: 'https://api.mailgun.net',
     });
 
